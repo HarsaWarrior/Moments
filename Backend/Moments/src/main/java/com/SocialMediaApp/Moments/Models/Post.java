@@ -1,5 +1,6 @@
 package com.SocialMediaApp.Moments.Models;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,37 +8,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="users")
-public class User {
+public class Post {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
-	private String firstName;
+	private String caption;
 	
-	private String lastName;
+	private String image;
 	
-	private String email;
+	private String video;
 	
-	private String password;
+	private User user;
 	
-	private String gender;
+	private LocalDateTime createdAt;
 	
-	private List<Integer> followers = new ArrayList<>();
-	
-	private List<Integer> followings = new ArrayList<>();
-	
-	private List<Post> savedPost = new ArrayList<>();
-	
+	private List<User> liked = new ArrayList<>();
 }
