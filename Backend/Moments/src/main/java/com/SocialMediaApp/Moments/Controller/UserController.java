@@ -27,41 +27,34 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping("/users")
+	@GetMapping("/api/users")
 	public List<User> getUsers(){
 		List<User> users =  userRepository.findAll();
 		return users;
 	}
 	
-	@GetMapping("/user/{id}")
+	@GetMapping("/api/user/{id}")
 	public User getUserById(@PathVariable("id") Integer id) throws Exception {
 		
 		User user = userService.findUserById(id);
 		return user;
 	}
 	
-	@PostMapping("/users")
-	public User createUser(@RequestBody User user) {
-		
-		User savedUser = userService.registerUser(user);
-		return savedUser;
-	}
-	
-	@PutMapping("/users/{userid}")
+	@PutMapping("/api/users/{userid}")
 	public User updateUser(@PathVariable Integer userid, @RequestBody User user) throws Exception {
 		
 		User updatedUser = userService.updateUser(user, userid);
 		return updatedUser;
 	}
 	
-	@PutMapping("/users/follow/{userid1}/{userid2}")
+	@PutMapping("/api/users/follow/{userid1}/{userid2}")
 	public User followUser(@PathVariable("userid1") Integer id1, @PathVariable("userid2") Integer id2) throws Exception {
 		
 		User user = userService.followUser(id1, id2);
 		return user;
 	}
 	
-	@GetMapping("/users/search")
+	@GetMapping("/api/users/search")
 	public List<User> searchUser(@RequestParam("query") String query){
 		
 		List<User> user = userService.searchUser(query);
