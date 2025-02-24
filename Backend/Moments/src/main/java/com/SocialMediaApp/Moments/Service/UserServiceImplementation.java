@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.SocialMediaApp.Moments.Config.JwtProvider;
 import com.SocialMediaApp.Moments.Models.User;
 import com.SocialMediaApp.Moments.Repository.UserRepository;
 
@@ -49,16 +50,16 @@ public class UserServiceImplementation implements UserService {
 	}
 
 	@Override
-	public User followUser(Integer userId1, Integer userId2) throws Exception {
+	public User followUser(Integer reqUserId, Integer userId2) throws Exception {
 		// TODO Auto-generated method stub
-		User user1 = findUserById(userId1);
+		User reqUser = findUserById(reqUserId);
 		User user2 = findUserById(userId2);
-		user2.getFollowers().add(user1.getId());
-		user1.getFollowings().add(user2.getId());
-		userRepository.save(user1);
+		user2.getFollowers().add(reqUser.getId());
+		reqUser.getFollowings().add(user2.getId());
+		userRepository.save(reqUser);
 		userRepository.save(user2);
 		
-		return user1;
+		return reqUser;
 	}
 
 	@Override
@@ -84,6 +85,10 @@ public class UserServiceImplementation implements UserService {
 			oldUser.setLastName(user.getLastName());
 		}
 		
+		if (user.getGender() != null) {
+			oldUser.setGender(user.getGender());
+		}
+		
 		User updatedUser = userRepository.save(oldUser);
 		
 		return updatedUser;
@@ -92,7 +97,17 @@ public class UserServiceImplementation implements UserService {
 	@Override
 	public List<User> searchUser(String query) {
 		// TODO Auto-generated method stub
-		return null;
+		return userRepository.searchUser(query);
+	}
+
+	@Override
+	public User findUserByJwtUser(String jwt) {
+		// TODO Auto-generated method stub
+		
+		String email = JwtProvider.getEmailFromJwtTokenString(jwt);
+		
+		User user = userRepository.findByEmail(email);
+		return user;
 	}
 
 }

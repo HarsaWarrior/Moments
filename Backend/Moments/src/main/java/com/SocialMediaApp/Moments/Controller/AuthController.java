@@ -70,7 +70,7 @@ public class AuthController {
 		
 		String token = JwtProvider.generateToken(authentication);
 		
-		AuthResponse res = new AuthResponse(token, "Register Success");
+		AuthResponse res = new AuthResponse(token, "Login Success");
 		return res;
 	}
 
