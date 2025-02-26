@@ -44,7 +44,7 @@ public class UserController {
 	@PutMapping("/api/users")
 	public User updateUser(@RequestHeader("Authorization") String jwt, @RequestBody User user) throws Exception {
 		
-		User reqUser = userService.findUserByJwtUser(jwt);
+		User reqUser = userService.findUserByJwt(jwt);
 		User updatedUser = userService.updateUser(user, reqUser.getId());
 		return updatedUser;
 	}
@@ -52,7 +52,7 @@ public class UserController {
 	@PutMapping("/api/users/follow/{userid2}")
 	public User followUser(@RequestHeader("Authorization") String jwt, @PathVariable("userid2") Integer id2) throws Exception {
 		
-		User reqUser = userService.findUserByJwtUser(jwt);
+		User reqUser = userService.findUserByJwt(jwt);
 		User user = userService.followUser(reqUser.getId(), id2);
 		return user;
 	}
@@ -67,7 +67,7 @@ public class UserController {
 	@GetMapping("/api/users/profile")
 	public User getUserFromToken (@RequestHeader("Authorization") String jwt) {
 		
-		User user = userService.findUserByJwtUser(jwt);
+		User user = userService.findUserByJwt(jwt);
 		
 		user.setPassword(null);
 		return user;

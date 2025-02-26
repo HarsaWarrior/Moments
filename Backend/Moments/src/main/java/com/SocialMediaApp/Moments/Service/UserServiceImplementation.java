@@ -101,7 +101,7 @@ public class UserServiceImplementation implements UserService {
 	}
 
 	@Override
-	public User findUserByJwtUser(String jwt) {
+	public User findUserByJwt(String jwt) {
 		// TODO Auto-generated method stub
 		
 		String email = JwtProvider.getEmailFromJwtTokenString(jwt);

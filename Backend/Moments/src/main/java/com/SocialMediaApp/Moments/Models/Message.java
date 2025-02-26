@@ -1,8 +1,6 @@
 package com.SocialMediaApp.Moments.Models;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,35 +9,30 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Post {
+public class Message {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private String id;
 	
-	private String caption;
+	private String content;
 	
 	private String image;
-	
-	private String video;
 	
 	@ManyToOne
 	private User user;
 	
-	private LocalDateTime createdAt;
+	@JsonIgnore
+	@ManyToOne
+	private Chat chat;
 	
-	@OneToMany
-	private List<User> liked = new ArrayList<>();
-	
-	@OneToMany
-	private List<Comment> comments = new ArrayList<>();
+	private LocalDateTime timeStamp;
 }
