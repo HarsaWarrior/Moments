@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.SocialMediaApp.Moments.Config.JwtProvider;
+import com.SocialMediaApp.Moments.Exceptions.UserException;
 import com.SocialMediaApp.Moments.Models.User;
 import com.SocialMediaApp.Moments.Repository.UserRepository;
 
@@ -31,7 +32,7 @@ public class UserServiceImplementation implements UserService {
 	}
 
 	@Override
-	public User findUserById(Integer userId) throws Exception {
+	public User findUserById(Integer userId) throws UserException {
 		
 		Optional<User> user = userRepository.findById(userId);
 		
@@ -39,7 +40,7 @@ public class UserServiceImplementation implements UserService {
 			return user.get();
 		}
 		
-		throw new Exception("User Not Found for the given id "+userId);
+		throw new UserException("User Not Found for the given id "+userId);
 	}
 
 	@Override
@@ -50,7 +51,7 @@ public class UserServiceImplementation implements UserService {
 	}
 
 	@Override
-	public User followUser(Integer reqUserId, Integer userId2) throws Exception {
+	public User followUser(Integer reqUserId, Integer userId2) throws UserException {
 		// TODO Auto-generated method stub
 		User reqUser = findUserById(reqUserId);
 		User user2 = findUserById(userId2);
@@ -63,12 +64,12 @@ public class UserServiceImplementation implements UserService {
 	}
 
 	@Override
-	public User updateUser(User user, Integer userId) throws Exception {
+	public User updateUser(User user, Integer userId) throws UserException {
 		// TODO Auto-generated method stub
 		Optional<User> user1 = userRepository.findById(userId);
 		
 		if(user1.isEmpty()) {
-			throw new Exception("User Not Found for the given id "+userId);
+			throw new UserException("User Not Found for the given id "+userId);
 		}
 		
 		User oldUser = user1.get();
