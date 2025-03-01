@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.SocialMediaApp.Moments.Exceptions.UserException;
 import com.SocialMediaApp.Moments.Models.Chat;
 import com.SocialMediaApp.Moments.Models.User;
 import com.SocialMediaApp.Moments.Requests.CreateChatRequest;
@@ -26,7 +27,7 @@ public class ChatController {
 	
 	@PostMapping("/api/chats")
 	public Chat createChat (@RequestHeader("Authorization") String jwt, 
-		@RequestBody CreateChatRequest req) throws Exception {
+		@RequestBody CreateChatRequest req) throws UserException {
 		
 		User reqUser = userService.findUserByJwt(jwt);
 		User user2 = userService.findUserById(req.getUserId());

@@ -2,21 +2,23 @@ package com.SocialMediaApp.Moments.Service;
 
 import java.util.List;
 
+import com.SocialMediaApp.Moments.Exceptions.PostException;
+import com.SocialMediaApp.Moments.Exceptions.UserException;
 import com.SocialMediaApp.Moments.Models.Post;
 
 public interface PostService {
 	
-	Post createNewPost (Post post, Integer userId) throws Exception;
+	Post createNewPost (Post post, Integer userId) throws UserException;
 	
-	String deletePost (Integer postId, Integer userId) throws Exception;
+	String deletePost (Integer postId, Integer userId) throws UserException, PostException;
 	
 	List<Post> findPostByUserId (Integer userId);
 	
-	Post findPostById (Integer postId) throws Exception;
+	Post findPostById (Integer postId) throws PostException;
 	
 	List<Post> findAllPost();
 	
-	Post savedPost (Integer postId, Integer userId) throws Exception;
+	Post savedPost (Integer postId, Integer userId) throws UserException, PostException;
 	
-	Post likePost (Integer postId, Integer userId) throws Exception;
+	Post likePost (Integer postId, Integer userId) throws UserException, PostException;
 }

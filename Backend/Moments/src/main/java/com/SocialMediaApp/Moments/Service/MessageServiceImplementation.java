@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.SocialMediaApp.Moments.Exceptions.ChatException;
 import com.SocialMediaApp.Moments.Models.Chat;
 import com.SocialMediaApp.Moments.Models.Message;
 import com.SocialMediaApp.Moments.Models.User;
@@ -26,7 +27,7 @@ public class MessageServiceImplementation implements MessageService{
 	private ChatRepository chatRepository;
 
 	@Override
-	public Message createMessage(User user, Integer chatId, Message req) throws Exception {
+	public Message createMessage(User user, Integer chatId, Message req) throws ChatException {
 		// TODO Auto-generated method stub
 		
 		Chat chat = chatService.findChatById(chatId);
@@ -48,7 +49,7 @@ public class MessageServiceImplementation implements MessageService{
 	}
 
 	@Override
-	public List<Message> findChatsMessages(Integer chatId) throws Exception {
+	public List<Message> findChatsMessages(Integer chatId) throws ChatException{
 		// TODO Auto-generated method stub
 		
 		Chat chat = chatService.findChatById(chatId);

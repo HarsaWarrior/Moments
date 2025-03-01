@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.SocialMediaApp.Moments.Exceptions.ChatException;
 import com.SocialMediaApp.Moments.Models.Chat;
 import com.SocialMediaApp.Moments.Models.User;
 import com.SocialMediaApp.Moments.Repository.ChatRepository;
@@ -35,12 +36,12 @@ public class ChatServiceImplementation implements ChatService{
 	}
 
 	@Override
-	public Chat findChatById(Integer chatId) throws Exception {
+	public Chat findChatById(Integer chatId) throws ChatException {
 		// TODO Auto-generated method stub
 		
 		Optional<Chat> chat = chatRepository.findById(chatId);
 		if(chat.isEmpty()) {
-			throw new Exception("Chat not found with id - "+chatId);
+			throw new ChatException("Chat not found with id - "+chatId);
 		}
 		return chat.get();
 	}

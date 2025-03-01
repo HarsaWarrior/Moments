@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.SocialMediaApp.Moments.Exceptions.CommentException;
+import com.SocialMediaApp.Moments.Exceptions.PostException;
+import com.SocialMediaApp.Moments.Exceptions.UserException;
 import com.SocialMediaApp.Moments.Models.Comment;
 import com.SocialMediaApp.Moments.Models.User;
 import com.SocialMediaApp.Moments.Service.CommentService;
@@ -25,7 +28,7 @@ public class CommentController {
 	@PostMapping("/api/comments/post/{postId}")
 	public Comment createComment(@RequestBody Comment comment, 
 			@RequestHeader("Authorization") String jwt, 
-			@PathVariable Integer postId) throws Exception {
+			@PathVariable Integer postId) throws UserException, PostException {
 		
 		User user = userService.findUserByJwt(jwt);
 		
@@ -35,7 +38,7 @@ public class CommentController {
 	
 	@PutMapping("/api/comments/like/{commentId}")
 	public Comment likeComment(@RequestHeader("Authorization") String jwt, 
-			@PathVariable Integer commentId) throws Exception {
+			@PathVariable Integer commentId) throws CommentException, UserException {
 		
 		User user = userService.findUserByJwt(jwt);
 		

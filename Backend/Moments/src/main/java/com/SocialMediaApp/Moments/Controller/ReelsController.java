@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.SocialMediaApp.Moments.Exceptions.UserException;
 import com.SocialMediaApp.Moments.Models.Reels;
 import com.SocialMediaApp.Moments.Models.User;
 import com.SocialMediaApp.Moments.Service.ReelsService;
@@ -40,7 +41,7 @@ public class ReelsController {
 	}
 	
 	@GetMapping("/api/reels/user/{userId}")
-	public List<Reels> findUsersReels(@PathVariable Integer userId) throws Exception {
+	public List<Reels> findUsersReels(@PathVariable Integer userId) throws UserException{
 		
 		List<Reels> reels = reelsService.findUsersReel(userId);
 		return reels;

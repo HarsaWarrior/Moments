@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.SocialMediaApp.Moments.Exceptions.UserException;
 import com.SocialMediaApp.Moments.Models.Story;
 import com.SocialMediaApp.Moments.Models.User;
 import com.SocialMediaApp.Moments.Service.StoryService;
@@ -33,7 +34,7 @@ public class StoryController {
 	}
 	
 	@GetMapping("/api/story/user/{userId}")
-	public List<Story> findUsersStory(@PathVariable Integer userId, @RequestHeader("Authorization") String jwt) throws Exception {
+	public List<Story> findUsersStory(@PathVariable Integer userId, @RequestHeader("Authorization") String jwt) throws UserException{
 		
 		User reqUser = userService.findUserByJwt(jwt);
 		

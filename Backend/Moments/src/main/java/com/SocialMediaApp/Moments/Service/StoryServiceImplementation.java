@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.SocialMediaApp.Moments.Exceptions.UserException;
 import com.SocialMediaApp.Moments.Models.Story;
 import com.SocialMediaApp.Moments.Models.User;
 import com.SocialMediaApp.Moments.Repository.StoryRepository;
@@ -32,7 +33,7 @@ public class StoryServiceImplementation implements StoryService{
 	}
 
 	@Override
-	public List<Story> findStoryByUserId(Integer userId) throws Exception {
+	public List<Story> findStoryByUserId(Integer userId) throws UserException {
 		// TODO Auto-generated method stub
 		User user = userService.findUserById(userId);
 		

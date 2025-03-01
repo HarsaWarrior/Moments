@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.SocialMediaApp.Moments.Exceptions.UserException;
 import com.SocialMediaApp.Moments.Models.Reels;
 import com.SocialMediaApp.Moments.Models.User;
 import com.SocialMediaApp.Moments.Repository.ReelsRepository;
@@ -38,7 +39,7 @@ public class ReelsServiceImplementation implements ReelsService{
 	}
 
 	@Override
-	public List<Reels> findUsersReel(Integer userId) throws Exception {
+	public List<Reels> findUsersReel(Integer userId) throws UserException{
 		// TODO Auto-generated method stub
 		User user = userService.findUserById(userId);
 		return reelsRepository.findByUserId(userId);

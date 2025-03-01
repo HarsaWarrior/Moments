@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.SocialMediaApp.Moments.Exceptions.PostException;
+import com.SocialMediaApp.Moments.Exceptions.UserException;
 import com.SocialMediaApp.Moments.Models.Post;
 import com.SocialMediaApp.Moments.Models.User;
 import com.SocialMediaApp.Moments.Repository.PostRepository;
@@ -25,7 +27,7 @@ public class PostServiceImplementation implements PostService{
 	UserRepository userRepository;
 
 	@Override
-	public Post createNewPost(Post post, Integer userId) throws Exception {
+	public Post createNewPost(Post post, Integer userId) throws UserException {
 		// TODO Auto-generated method stub
 		User user = userService.findUserById(userId);
 		Post newPost = new Post();
@@ -38,13 +40,13 @@ public class PostServiceImplementation implements PostService{
 	}
 
 	@Override
-	public String deletePost(Integer postId, Integer userId) throws Exception {
+	public String deletePost(Integer postId, Integer userId) throws PostException, UserException {
 		// TODO Auto-generated method stub
 		Post post = findPostById(postId);
 		User user = userService.findUserById(userId);
 		
 		if(post.getUser().getId() != user.getId()) {
-			throw new Exception ("You can't delete another users post");
+			throw new PostException ("You can't delete another users post");
 		}
 		
 		postRepository.delete(post);
@@ -58,11 +60,11 @@ public class PostServiceImplementation implements PostService{
 	}
 
 	@Override
-	public Post findPostById(Integer postId) throws Exception {
+	public Post findPostById(Integer postId) throws PostException {
 		// TODO Auto-generated method stub
 		Optional<Post> temp = postRepository.findById(postId);
 		if(temp.isEmpty()) {
-			throw new Exception("Post not found for the id " + postId);
+			throw new PostException("Post not found for the id " + postId);
 		}
 		Post post = temp.get();
 		return post;
@@ -75,7 +77,7 @@ public class PostServiceImplementation implements PostService{
 	}
 
 	@Override
-	public Post savedPost(Integer postId, Integer userId) throws Exception {
+	public Post savedPost(Integer postId, Integer userId) throws UserException, PostException {
 		// TODO Auto-generated method stub
 		Post post = findPostById(postId);
 		User user = userService.findUserById(userId);
@@ -92,7 +94,7 @@ public class PostServiceImplementation implements PostService{
 	}
 
 	@Override
-	public Post likePost(Integer postId, Integer userId) throws Exception {
+	public Post likePost(Integer postId, Integer userId) throws UserException, PostException {
 		// TODO Auto-generated method stub
 		Post post = findPostById(postId);
 		User user = userService.findUserById(userId);
