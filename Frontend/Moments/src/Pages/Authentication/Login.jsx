@@ -1,4 +1,7 @@
-import { Button } from "@mui/material";
+import {
+  Button,
+  TextField,
+} from "@mui/material";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
@@ -24,23 +27,29 @@ export default function Login() {
       >
         <Form className="space-y-5">
           <div className="space-y-5">
-            <div>
+            <div className = "rounded-4xl ml-6 mr-6">
               <Field
                 name="email"
                 placeholder="Email"
                 type="email"
+                as={TextField}
                 variant="outlined"
+                fullWidth
               />
               <ErrorMessage
                 name="email"
                 component={"div"}
                 className="text-red-500"
               />
+            </div>
+            <div className = "rounded-4xl ml-6 mr-6">
               <Field
                 name="password"
                 placeholder="Password"
                 type="password"
+                as={TextField}
                 variant="outlined"
+                fullWidth
               />
               <ErrorMessage
                 name="password"
@@ -48,15 +57,17 @@ export default function Login() {
                 className="text-red-500"
               />
             </div>
-            <Button
-              sx={{ padding: ".8rem 0rem" }}
-              fullWidth
-              type="submit"
-              variant="contained"
-              color="primary"
-            >
-              Login
-            </Button>
+            <div className = "rounded-4xl ml-6 mr-6 shadow-blue-500/50">
+              <Button
+                sx={{ padding: ".8rem 0rem" }}
+                fullWidth
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                Login
+              </Button>
+            </div>
           </div>
         </Form>
       </Formik>

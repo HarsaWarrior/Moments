@@ -17,7 +17,8 @@ class Authentication extends Component {
               Capture life&apos;s moments, one story at a time.
             </h3>
           </div>
-          <Register />
+          <Login />
+          {/*<Register />*/}
         </div>
       </div>
     );
