@@ -7,7 +7,9 @@ import {
 } from "@mui/material";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import * as Yup from "yup";
+import { registerUserAction } from "../../Redux/Auth/auth.action";
 
 const initialValues = {
   firstName: "",
@@ -27,8 +29,10 @@ const validationSchema = Yup.object({
 });
 export default function Register() {
   const [gender, setGender] = useState("");
+  const dispatch = useDispatch();
   const handleSubmit = (values) => {
     console.log("Form values", values);
+    dispatch(registerUserAction({data: values}))
   };
 
   return (
@@ -40,7 +44,7 @@ export default function Register() {
       >
         <Form className="space-y-5">
           <div className="space-y-5">
-            <div className = "rounded-4xl ml-6 mr-6">
+            <div className = "rounded-4xl m-10">
               <Field
                 name="firstName"
                 placeholder="First Name"
@@ -55,7 +59,7 @@ export default function Register() {
                 className="text-red-500"
               />
             </div>
-            <div className = "rounded-4xl ml-6 mr-6">
+            <div className = "rounded-4xl m-10">
               <Field
                 name="lastName"
                 placeholder="Last Name"
@@ -70,7 +74,7 @@ export default function Register() {
                 className="text-red-500"
               />
             </div>
-            <div className = "rounded-4xl ml-6 mr-6">
+            <div className = "rounded-4xl m-10">
               <Field
                 name="email"
                 placeholder="Email"
@@ -85,7 +89,7 @@ export default function Register() {
                 className="text-red-500"
               />
             </div>
-            <div className = "rounded-4xl ml-6 mr-6">
+            <div className = "rounded-4xl m-10">
               <Field
                 name="password"
                 placeholder="Password"
@@ -100,7 +104,7 @@ export default function Register() {
                 className="text-red-500"
               />
             </div>
-            <div className = "rounded-4xl ml-6 mr-6">
+            <div className = "rounded-4xl m-10">
               <Field name="gender">
                 {({ field, form }) => (
                   <RadioGroup
@@ -114,7 +118,7 @@ export default function Register() {
                 )}
               </Field>
             </div>
-            <div className = "rounded-4xl ml-6 mr-6 shadow-blue-500/50">
+            <div className = "rounded-4xl m-10 shadow-blue-500/50">
               <Button
                 sx={{ padding: ".8rem 0rem" }}
                 fullWidth

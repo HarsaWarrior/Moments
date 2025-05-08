@@ -5,18 +5,22 @@ import {
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
+import {useDispatch} from "react-redux"
+import { loginUserAction } from "../../Redux/Auth/auth.action";
 
 const initialValues = { email: "", password: "" };
-const validationSchema = {
+const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is Required"),
   password: Yup.string()
     .min(6, "Password must be atleast 6 characters")
     .required("Password is required"),
-};
+});
 export default function Login() {
   const [formValue, setFormValue] = useState();
-  const handleSubmit = () => {
+  const dispatch = useDispatch();
+  const handleSubmit = (values) => {
     console.log("Handle Submit", values);
+    dispatch(loginUserAction({data: values}));
   };
   return (
     <>
@@ -27,7 +31,7 @@ export default function Login() {
       >
         <Form className="space-y-5">
           <div className="space-y-5">
-            <div className = "rounded-4xl ml-6 mr-6">
+            <div className = "rounded-4xl m-10">
               <Field
                 name="email"
                 placeholder="Email"
@@ -42,7 +46,7 @@ export default function Login() {
                 className="text-red-500"
               />
             </div>
-            <div className = "rounded-4xl ml-6 mr-6">
+            <div className = "rounded-4xl m-10">
               <Field
                 name="password"
                 placeholder="Password"
@@ -57,7 +61,7 @@ export default function Login() {
                 className="text-red-500"
               />
             </div>
-            <div className = "rounded-4xl ml-6 mr-6 shadow-blue-500/50">
+            <div className = "rounded-4xl m-10 shadow-blue-500/50">
               <Button
                 sx={{ padding: ".8rem 0rem" }}
                 fullWidth
