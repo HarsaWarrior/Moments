@@ -2,6 +2,7 @@ import { Card } from "@mui/material";
 import React, { Component } from "react";
 import Login from "./Login";
 import Register from "./Register";
+import { Route, Routes } from "react-router-dom";
 
 export default function Authentication() {
   return (
@@ -15,8 +16,11 @@ export default function Authentication() {
             Capture life&apos;s moments, one story at a time.
           </h3>
         </div>
-        <Login />
-        {/*<Register />*/}
+        <Routes>
+          <Route path = '/' element = {<Login />} />
+          <Route path = '/login' element = {<Login />} />
+          <Route path = '/register' element = {<Register />} />
+        </Routes>
       </div>
     </div>
   );
