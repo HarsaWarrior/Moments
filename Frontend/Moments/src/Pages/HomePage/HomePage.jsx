@@ -1,16 +1,53 @@
 import React from 'react'
-import Sidebar from '../../Components/Sidebar'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import MiddlePart from '../../Components/MiddlePart/MiddlePart';
+import Reels from '../../Components/Reels/Reels';
+import CreateReelsForm from '../../Components/Reels/CreateReelsForm';
+import Profile from '../Profile/Profile';
+import { Grid2 } from '@mui/material';
+import HomeRight from '../../Components/HomeRight/HomeRight';
+import Sidebar from '../../Components/Sidebar/Sidebar';
 
 function HomePage() {
+  
+  const location = useLocation();
+
   return (
-    <div className='grid grid-cols-4'>
-        <div className='sticky'>
+    <div className='px-20'>
+      <Grid2 container spacing={0}>
+        <Grid2 size={{ xs: 0, lg: 3}}>
+          <div className='sticky top-0'>
+            <Sidebar />
+          </div>
+        </Grid2>
+        <Grid2 className = 'px-5 flex justify-center' size={{xs: 12, lg: location.pathname === "/" ? 6 : 9}}>
+          <Routes>
+            <Route path = "/" element = {<MiddlePart />} />
+            <Route path = "/reels" element = {<Reels />} />
+            <Route path = "/create-reels" element = {<CreateReelsForm />} />
+            <Route path = "/profile/:id" element = {<Profile />} />
+          </Routes> 
+        </Grid2>
+        <Grid2 size = {{lg: 3}} className = "relative">
+          <div className='sticky top-0 w-full'>
+            <HomeRight />
+          </div>
+        </Grid2>
+      </Grid2>
+    </div>
+    /*
+    <div className='sticky top-0'>
             <Sidebar />
         </div>
-        <div className='col-span-2 overflow-y-scroll'>
-            
+        <div lg = {location.pathname === "/" ? 6 : 9} className='px-5 flex justify-center col-span-2 overflow-y-scroll' xs={12} >
+          <Routes>
+            <Route path = "/" element = {<MiddlePart />} />
+            <Route path = "/reels" element = {<Reels />} />
+            <Route path = "/create-reels" element = {<CreateReelsForm />} />
+            <Route path = "/profile/:id" element = {<Profile />} />
+          </Routes> 
         </div>
-    </div>
+    */
   )
 }
 
