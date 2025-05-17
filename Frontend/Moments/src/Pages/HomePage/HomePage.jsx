@@ -28,26 +28,13 @@ function HomePage() {
             <Route path = "/profile/:id" element = {<Profile />} />
           </Routes> 
         </Grid2>
-        <Grid2 size = {{lg: 3}} className = "relative">
+        {location.pathname === "/" && (<Grid2 size = {{lg: 3}} className = "relative">
           <div className='sticky top-0 w-full'>
             <HomeRight />
           </div>
-        </Grid2>
+        </Grid2>)}
       </Grid2>
     </div>
-    /*
-    <div className='sticky top-0'>
-            <Sidebar />
-        </div>
-        <div lg = {location.pathname === "/" ? 6 : 9} className='px-5 flex justify-center col-span-2 overflow-y-scroll' xs={12} >
-          <Routes>
-            <Route path = "/" element = {<MiddlePart />} />
-            <Route path = "/reels" element = {<Reels />} />
-            <Route path = "/create-reels" element = {<CreateReelsForm />} />
-            <Route path = "/profile/:id" element = {<Profile />} />
-          </Routes> 
-        </div>
-    */
   )
 }
 
