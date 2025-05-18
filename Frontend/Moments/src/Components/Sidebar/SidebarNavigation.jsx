@@ -18,13 +18,13 @@ export const navigationMenu = [
         id: 2,
         title:"Reels",
         icon:<ExploreIcon/>,
-        path:"/"
+        path:"/reels"
     },
     {
         id: 3,
         title:"Create Reels",
         icon:<ControlPointIcon/>,
-        path:"/"
+        path:"/create-reels"
     },
     {
         id: 4,
@@ -36,7 +36,7 @@ export const navigationMenu = [
         id: 5,
         title:"Message",
         icon:<MessageIcon/>,
-        path:"/"
+        path:"/message"
     },
     {
         id: 6,
@@ -54,6 +54,6 @@ export const navigationMenu = [
         id: 8,
         title:"Profile",
         icon:<AccountCircleIcon/>,
-        path:"/"
+        path:"/profile/1"
     }
 ]
